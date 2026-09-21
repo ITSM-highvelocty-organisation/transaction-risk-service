@@ -1,0 +1,15 @@
+image: atlassian/default-image:4
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build & Package
+          script:
+            - export DOCKER_TAG="${BITBUCKET_COMMIT:0:12}"
+            - sleep 5
+      - step:
+          name: Deploy to Prod
+          deployment: Production
+          script:
+            - export DOCKER_TAG="${BITBUCKET_COMMIT:0:12}"
+            - sleep 3

@@ -1,3 +1,0 @@
-# transaction-risk-service
-
-Initializing...
