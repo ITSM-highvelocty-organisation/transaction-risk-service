@@ -5,3 +5,8 @@ export function assessPaymentIntent({amount, currency}) {
   if (amount >= 100000) return {decision: RiskDecision.REVIEW, riskScore: 61, ruleVersion: 'risk-v1'};
   return {decision: RiskDecision.APPROVE, riskScore: 14, ruleVersion: 'risk-v1'};
 }
+
+export function assessWalletPaymentIntent({paymentMethod, amount, currency}) {
+  if (paymentMethod === 'APPLE_PAY' || paymentMethod === 'GOOGLE_PAY') return {decision: RiskDecision.APPROVE, riskScore: 14, ruleVersion: 'wallet-risk-v3'};
+  return assessPaymentIntent({amount, currency});
+}
